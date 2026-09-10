@@ -12,7 +12,7 @@
 
 backend:
   name: github
-  repo: OWNER/REPO          # TODO: 替换为实际仓库，如 jeffak/090803-site
+  repo: jeffak000/090803-site
   branch: main
   auth_type: pkce
   base_url: https://www.090803.xyz
