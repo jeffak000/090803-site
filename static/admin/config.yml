@@ -14,8 +14,8 @@ backend:
   name: github
   repo: jeffak000/090803-site
   branch: main
-  auth_type: pkce
   base_url: https://www.090803.xyz
+  auth_endpoint: /api/auth
 
 # 媒体资源存放位置（Hugo 会随 static/ 一起发布）
 media_folder: "static/images/uploads"
