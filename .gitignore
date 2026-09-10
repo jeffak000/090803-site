@@ -1,0 +1,18 @@
+# Hugo 构建产物
+/public/
+/resources/
+.hugo_build.lock
+
+# 本地 Hugo 二进制（体积大，不进仓库）
+/tools/
+
+# WorkBuddy 项目元数据
+.workbuddy/
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+*.swp
+
+# Wrangler 本地缓存
+.wrangler/

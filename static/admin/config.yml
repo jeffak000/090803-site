@@ -1,0 +1,47 @@
+# Decap CMS 配置 (https://decapcms.org/docs/)
+# 后端使用 GitHub + PKCE 流程（无需 client secret，适合 Cloudflare Pages 等纯静态托管）
+#
+# 部署前请替换下面两处占位符：
+#   1) repo: 你的 GitHub 仓库，格式 OWNER/REPO
+#   2) base_url: 托管 /admin/ 的站点来源（域名或 pages.dev 预览）
+#
+# 同时在 GitHub 创建一个 OAuth App：
+#   - Homepage URL:        https://www.090803.xyz
+#   - Authorization callback URL: https://www.090803.xyz/admin/
+# （若先用 pages.dev 预览，则两处都改成 https://090803-site.pages.dev）
+
+backend:
+  name: github
+  repo: OWNER/REPO          # TODO: 替换为实际仓库，如 jeffak/090803-site
+  branch: main
+  auth_type: pkce
+  base_url: https://www.090803.xyz
+
+# 媒体资源存放位置（Hugo 会随 static/ 一起发布）
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
+# 发布设置：保存即提交到仓库，Cloudflare Pages 自动重建
+publish_mode: simple
+
+collections:
+  - name: "posts"
+    label: "文章"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: "标题", widget: string }
+      - { name: date, label: "日期", widget: datetime, default: "" }
+      - { name: draft, label: "草稿", widget: boolean, default: false }
+      - { name: body, label: "正文", widget: markdown }
+
+  - name: "pages"
+    label: "页面"
+    files:
+      - name: "home"
+        label: "首页"
+        file: "content/_index.md"
+        fields:
+          - { name: title, label: "标题", widget: string }
+          - { name: body, label: "正文", widget: markdown }
