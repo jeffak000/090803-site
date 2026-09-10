@@ -1,14 +1,11 @@
 # Decap CMS 配置 (https://decapcms.org/docs/)
-# 后端使用 GitHub + PKCE 流程（无需 client secret，适合 Cloudflare Pages 等纯静态托管）
+# 后端：GitHub，鉴权走 Cloudflare Pages Functions（functions/api/auth.js + callback.js）
+# 用 GitHub OAuth App 的 client_id / client_secret（存于 Pages 环境变量 GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET）
 #
-# 部署前请替换下面两处占位符：
-#   1) repo: 你的 GitHub 仓库，格式 OWNER/REPO
-#   2) base_url: 托管 /admin/ 的站点来源（域名或 pages.dev 预览）
-#
-# 同时在 GitHub 创建一个 OAuth App：
+# 需在 GitHub 创建 OAuth App：
 #   - Homepage URL:        https://www.090803.xyz
-#   - Authorization callback URL: https://www.090803.xyz/admin/
-# （若先用 pages.dev 预览，则两处都改成 https://090803-site.pages.dev）
+#   - Authorization callback URL: https://www.090803.xyz
+# （若先用 pages.dev 预览，把 base_url 改成对应 pages.dev 地址）
 
 backend:
   name: github
