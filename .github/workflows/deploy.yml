@@ -30,9 +30,13 @@ jobs:
       - name: Build
         run: hugo --gc --minify
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: db91a79d9bf83814c81a7c92cac0805a
-          command: pages deploy public --project-name=090803-site --branch=main --commit-dirty=true
+          node-version: '20'
+
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: db91a79d9bf83814c81a7c92cac0805a
+        run: npx wrangler@3 pages deploy public --project-name=090803-site --branch=main --commit-dirty=true
